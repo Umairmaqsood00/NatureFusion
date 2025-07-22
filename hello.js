@@ -1,0 +1,1 @@
+console.log("Hello from JavaScript! This file is here to add JavaScript to the project."); 
