@@ -28,85 +28,77 @@ const SOUNDS = [
     key: "wind",
     label: "Wind",
     icon: "💨",
-    file: require("./assets/wind.mp3"),
+    file: require("./assets/mp3/wind.mp3"),
   },
   {
     key: "crickets",
     label: "Crickets",
     icon: "🦗",
-    file: require("./assets/crickets.mp3"),
+    file: require("./assets/mp3/crickets.mp3"),
   },
   {
     key: "birds",
     label: "Birds",
     icon: "🕊️",
-    file: require("./assets/birds.mp3"),
+    file: require("./assets/mp3/birds.mp3"),
   },
   {
     key: "waves",
     label: "Waves",
     icon: "🌊",
-    file: require("./assets/waves.mp3"),
+    file: require("./assets/mp3/waves.mp3"),
   },
   {
     key: "rain2",
     label: "Rain",
     icon: "☔",
-    file: require("./assets/rain2.mp3"),
+    file: require("./assets/mp3/rain2.mp3"),
   },
   {
     key: "rainwiththunder",
     label: "Rain with Thunder",
     icon: "🌧️⚡",
-    file: require("./assets/rainwiththunder.mp3"),
+    file: require("./assets/mp3/rainwiththunder.mp3"),
   },
   {
     key: "stormrainthunder",
     label: "Storm Rain Thunder",
     icon: "🌩️",
-    file: require("./assets/stormrainthunder.mp3"),
+    file: require("./assets/mp3/stormrainthunder.mp3"),
   },
   {
     key: "coffeeshop",
     label: "Coffee\nshop",
     icon: "☕",
-    file: require("./assets/coffeeshop.mp3"),
+    file: require("./assets/mp3/coffeeshop.mp3"),
   },
 ];
 
 const { width, height } = Dimensions.get("window");
 
 export default function App() {
-  type SoundKey = (typeof SOUNDS)[number]["key"];
-  type SoundStates = {
-    [key in SoundKey]: { isPlaying: boolean; volume: number };
-  };
-  type SoundRefs = { [key in SoundKey]: Audio.Sound | null };
-
-  const [soundStates, setSoundStates] = useState<SoundStates>(
+  const [soundStates, setSoundStates] = useState(
     SOUNDS.reduce((acc, s) => {
-      acc[s.key as SoundKey] = { isPlaying: false, volume: 0.7 };
+      acc[s.key] = { isPlaying: false, volume: 0.7 };
       return acc;
-    }, {} as SoundStates)
+    }, {})
   );
-  const soundRefs = useRef<SoundRefs>(
+  const soundRefs = useRef(
     SOUNDS.reduce((acc, s) => {
-      acc[s.key as SoundKey] = null;
+      acc[s.key] = null;
       return acc;
-    }, {} as SoundRefs)
+    }, {})
   );
   const [timerModalVisible, setTimerModalVisible] = useState(false);
   const [timerMinutes, setTimerMinutes] = useState("");
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef(null);
   const [mixesModalVisible, setMixesModalVisible] = useState(false);
-  const [mixes, setMixes] = useState<{ name: string; state: SoundStates }[]>(
-    []
-  );
+  const [mixes, setMixes] = useState([]);
   const [newMixName, setNewMixName] = useState("");
-  const [timerRemaining, setTimerRemaining] = useState<number | null>(null);
-  const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [timerRemaining, setTimerRemaining] = useState(null);
+  const timerIntervalRef = useRef(null);
 
-  const handlePlayPause = async (key: SoundKey) => {
+  const handlePlayPause = async (key) => {
     try {
       const state = soundStates[key];
       if (!state.isPlaying) {
@@ -117,7 +109,7 @@ export default function App() {
           );
           soundRefs.current[key] = sound;
         } else {
-          await soundRefs.current[key]!.playAsync();
+          await soundRefs.current[key].playAsync();
         }
         setSoundStates((prev) => ({
           ...prev,
@@ -125,7 +117,7 @@ export default function App() {
         }));
       } else {
         if (soundRefs.current[key]) {
-          await soundRefs.current[key]!.pauseAsync();
+          await soundRefs.current[key].pauseAsync();
         }
         setSoundStates((prev) => ({
           ...prev,
@@ -137,28 +129,28 @@ export default function App() {
     }
   };
 
-  const handleVolumeChange = (key: SoundKey, value: any) => {
+  const handleVolumeChange = (key, value) => {
     setSoundStates((prev) => ({
       ...prev,
       [key]: { ...prev[key], volume: value },
     }));
   };
 
-  const handleVolumeSet = async (key: SoundKey, value: any) => {
+  const handleVolumeSet = async (key, value) => {
     if (soundRefs.current[key]) {
-      await soundRefs.current[key]!.setVolumeAsync(value);
+      await soundRefs.current[key].setVolumeAsync(value);
     }
   };
 
   const stopAllSounds = async () => {
-    for (const key of Object.keys(soundStates) as SoundKey[]) {
+    for (const key of Object.keys(soundStates)) {
       if (soundRefs.current[key] && soundStates[key].isPlaying) {
-        await soundRefs.current[key]!.pauseAsync();
+        await soundRefs.current[key].pauseAsync();
       }
     }
     setSoundStates((prev) => {
       const newState = { ...prev };
-      for (const key of Object.keys(newState) as SoundKey[]) {
+      for (const key of Object.keys(newState)) {
         newState[key].isPlaying = false;
       }
       return newState;
@@ -174,7 +166,7 @@ export default function App() {
       timerIntervalRef.current = setInterval(() => {
         setTimerRemaining(prev => {
           if (prev && prev > 1) return prev - 1;
-          clearInterval(timerIntervalRef.current!);
+          clearInterval(timerIntervalRef.current);
           return null;
         });
       }, 1000);
@@ -183,7 +175,7 @@ export default function App() {
         setTimerModalVisible(false);
         setTimerMinutes("");
         setTimerRemaining(null);
-        clearInterval(timerIntervalRef.current!);
+        clearInterval(timerIntervalRef.current);
         Alert.alert("Timer ended", "All sounds stopped.");
       }, ms);
       setTimerModalVisible(false);
@@ -203,12 +195,12 @@ export default function App() {
     Keyboard.dismiss();
   };
 
-  const loadMix = (mix: { name: string; state: SoundStates }) => {
+  const loadMix = (mix) => {
     setSoundStates({ ...mix.state });
     setMixesModalVisible(false);
   };
 
-  const deleteMix = (name: string) => {
+  const deleteMix = (name) => {
     setMixes((prev) => prev.filter((m) => m.name !== name));
   };
 
@@ -543,4 +535,4 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 12,
   },
-});
+}); 
