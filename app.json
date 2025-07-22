@@ -1,6 +1,7 @@
 {
   "expo": {
-    "name": "weather",
+    "name": "NatureFusion",
+    "displayName": "NatureFusion",
     "slug": "weather",
     "version": "1.0.0",
     "orientation": "portrait",
