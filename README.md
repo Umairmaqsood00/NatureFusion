@@ -1,8 +1,6 @@
 # 🌿 NatureFusion
 
 ![Platform](https://img.shields.io/badge/platform-react--native-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-
 Find your calm with nature-inspired soundscapes.
 
 ---
