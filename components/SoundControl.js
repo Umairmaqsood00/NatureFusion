@@ -2,26 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import Slider from '@react-native-community/slider';
 
-type Sound = {
-  key: string;
-  label: string;
-  icon: string;
-};
-
-type SoundState = {
-  isPlaying: boolean;
-  volume: number;
-};
-
-type Props = {
-  sound: Sound;
-  state: SoundState;
-  onPlayPause: () => void;
-  onVolumeChange: (value: number) => void;
-  onVolumeSet: (value: number) => void;
-};
-
-export default function SoundControl({ sound, state, onPlayPause, onVolumeChange, onVolumeSet }: Props) {
+export default function SoundControl({ sound, state, onPlayPause, onVolumeChange, onVolumeSet }) {
   return (
     <View style={styles.soundControl}>
       <TouchableOpacity

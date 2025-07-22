@@ -19,9 +19,9 @@ import { Audio } from "expo-av";
 import { useState, useRef, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Slider from "@react-native-community/slider";
-import AnimatedParticles from "./components/AnimatedParticles";
-import SoundControl from "./components/SoundControl";
-import BackgroundGradient from "./components/BackgroundGradient";
+import AnimatedParticles from "./components/AnimatedParticles.js";
+import SoundControl from "./components/SoundControl.js";
+import BackgroundGradient from "./components/BackgroundGradient.js";
 
 const SOUNDS = [
   {
@@ -137,14 +137,14 @@ export default function App() {
     }
   };
 
-  const handleVolumeChange = (key: SoundKey, value: number) => {
+  const handleVolumeChange = (key: SoundKey, value: any) => {
     setSoundStates((prev) => ({
       ...prev,
       [key]: { ...prev[key], volume: value },
     }));
   };
 
-  const handleVolumeSet = async (key: SoundKey, value: number) => {
+  const handleVolumeSet = async (key: SoundKey, value: any) => {
     if (soundRefs.current[key]) {
       await soundRefs.current[key]!.setVolumeAsync(value);
     }
@@ -231,8 +231,8 @@ export default function App() {
     return () => {
       if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
       SOUNDS.forEach(async (s) => {
-        if (soundRefs.current[s.key]) {
-          await soundRefs.current[s.key].unloadAsync();
+        if (soundRefs.current[s.key] !== null) {
+          await soundRefs.current[s.key]?.unloadAsync();
         }
       });
     };
