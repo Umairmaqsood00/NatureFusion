@@ -22,7 +22,7 @@ Find your calm with nature-inspired soundscapes.
 
 ### 1. Clone the repository
 ```sh
-git clone https://github.com/yourusername/NatureFusion.git
+git clone https://github.com/Umairmaqsood00/NatureFusion.git
 cd NatureFusion
 ```
 
