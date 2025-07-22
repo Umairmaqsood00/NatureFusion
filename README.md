@@ -2,7 +2,6 @@
 
 ![Platform](https://img.shields.io/badge/platform-react--native-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Languages](https://img.shields.io/github/languages/top/yourusername/NatureFusion)
 
 Find your calm with nature-inspired soundscapes.
 
