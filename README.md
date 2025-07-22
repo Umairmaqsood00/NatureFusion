@@ -12,7 +12,6 @@ Find your calm with nature-inspired soundscapes.
 
 - Relaxing nature sounds (wind, rain, thunder, birds, waves, coffee shop, and more)
 - Mix and match sounds, adjust individual volumes
-- Save and load your favorite sound mixes
 - Timer to auto-stop playback
 - Beautiful animated background and particles
 - Responsive design for mobile
@@ -56,7 +55,8 @@ NatureFusion/
 
 ## 🖼️ Screenshots
 
-> _Add your app screenshots here!_
+<img width="1365" height="684" alt="Naturefusionss" src="https://github.com/user-attachments/assets/4937466d-11d0-45ce-bc4e-493b2562da38" />
+
 
 ---
 
@@ -71,16 +71,9 @@ NatureFusion/
 
 ## 🙏 Credits
 
-- Sound assets: [Freesound](https://freesound.org/) and other open sources
+- Sound assets: [Freesound](https://pixabay.com/) and other open sources
 - Icons: Emoji
 - Inspired by popular relaxation apps
-
----
-
-## 📄 License
-
-MIT License. See [LICENSE](LICENSE) for details.
-
 ---
 
 ## ⭐️ Show your support
