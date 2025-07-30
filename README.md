@@ -2,7 +2,7 @@
 
 ![Platform](https://img.shields.io/badge/platform-react--native-blue)
 
-Find your calm with nature-inspired soundscapes.
+Find your calm with nature-inspired soundscapes
 
 ---
 
